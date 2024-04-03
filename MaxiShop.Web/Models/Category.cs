@@ -1,9 +1,12 @@
-﻿namespace MaxiShop.Web.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MaxiShop.Web.Models
 {
     public class Category
     {
         public int Id { get; set; }
 
+        [Required]
         public string? Name { get; set; }
     }
 }
