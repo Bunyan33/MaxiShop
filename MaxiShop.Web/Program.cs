@@ -1,4 +1,4 @@
-using MaxiShop.Web.Data;
+using MaxiShop.Infrastructure.DbContexts;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

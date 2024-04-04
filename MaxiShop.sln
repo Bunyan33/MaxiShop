@@ -5,7 +5,13 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D9C714C4-54ED-498A-A1CF-2D02A7C50B07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaxiShop.Web", "MaxiShop.Web\MaxiShop.Web.csproj", "{C5E650E4-99F6-4B49-ADD8-4734F9E9DB2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaxiShop.Web", "MaxiShop.Web\MaxiShop.Web.csproj", "{C5E650E4-99F6-4B49-ADD8-4734F9E9DB2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaxiShop.Application", "MaxiShop.Application\MaxiShop.Application.csproj", "{D05DA5A9-67FE-4C8C-B0D1-A0C93D941E9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaxiShop.Domine", "MaxiShop.Domine\MaxiShop.Domine.csproj", "{8423DAA3-1E50-4DA9-BA4B-8568D642A3C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaxiShop.Infrastructure", "MaxiShop.Infrastructure\MaxiShop.Infrastructure.csproj", "{736DB10B-2654-4173-85CA-00A0C396A047}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +23,27 @@ Global
 		{C5E650E4-99F6-4B49-ADD8-4734F9E9DB2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5E650E4-99F6-4B49-ADD8-4734F9E9DB2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5E650E4-99F6-4B49-ADD8-4734F9E9DB2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D05DA5A9-67FE-4C8C-B0D1-A0C93D941E9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D05DA5A9-67FE-4C8C-B0D1-A0C93D941E9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D05DA5A9-67FE-4C8C-B0D1-A0C93D941E9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D05DA5A9-67FE-4C8C-B0D1-A0C93D941E9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8423DAA3-1E50-4DA9-BA4B-8568D642A3C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8423DAA3-1E50-4DA9-BA4B-8568D642A3C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8423DAA3-1E50-4DA9-BA4B-8568D642A3C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8423DAA3-1E50-4DA9-BA4B-8568D642A3C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{736DB10B-2654-4173-85CA-00A0C396A047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{736DB10B-2654-4173-85CA-00A0C396A047}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{736DB10B-2654-4173-85CA-00A0C396A047}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{736DB10B-2654-4173-85CA-00A0C396A047}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C5E650E4-99F6-4B49-ADD8-4734F9E9DB2E} = {D9C714C4-54ED-498A-A1CF-2D02A7C50B07}
+		{D05DA5A9-67FE-4C8C-B0D1-A0C93D941E9C} = {D9C714C4-54ED-498A-A1CF-2D02A7C50B07}
+		{8423DAA3-1E50-4DA9-BA4B-8568D642A3C6} = {D9C714C4-54ED-498A-A1CF-2D02A7C50B07}
+		{736DB10B-2654-4173-85CA-00A0C396A047} = {D9C714C4-54ED-498A-A1CF-2D02A7C50B07}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {567F1317-AE75-4AFF-A37D-06BAC44FAE3F}

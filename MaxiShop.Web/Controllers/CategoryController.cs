@@ -1,5 +1,5 @@
-﻿using MaxiShop.Web.Data;
-using MaxiShop.Web.Models;
+﻿using MaxiShop.Domine.Models;
+using MaxiShop.Infrastructure.DbContexts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
