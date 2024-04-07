@@ -16,7 +16,7 @@ namespace MaxiShop.Domine.Contracts
 
         Task<IEnumerable<T>> GetAllAsync();
 
-        Task<T> GetById(Expression<Func<T, bool>> condition);
+        Task<T> GetByIdAsync(Expression<Func<T, bool>> condition);
 
     }
 }

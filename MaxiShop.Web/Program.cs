@@ -1,10 +1,15 @@
 using MaxiShop.Infrastructure;
+using MaxiShop.Application;
 using MaxiShop.Infrastructure.DbContexts;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+#region service for Application
+
+builder.Services.AddApplicationService();
+#endregion
 
 #region service for Infrastructure
 

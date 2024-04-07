@@ -1,6 +1,8 @@
-﻿using MaxiShop.Application.DTO.Category;
+﻿using AutoMapper;
+using MaxiShop.Application.DTO.Category;
 using MaxiShop.Application.Services.Interface;
 using MaxiShop.Domine.Contracts;
+using MaxiShop.Domine.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,34 +14,47 @@ namespace MaxiShop.Application.Services
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IMapper _mapper;
 
-        public CategoryService(ICategoryRepository categoryRepository)
+        public CategoryService(ICategoryRepository categoryRepository, IMapper mapper)
         {
             _categoryRepository = categoryRepository;
+            _mapper = mapper;
         }
-        public Task<CategoryDto> CreateAsync(CreateCategoryDto createCategoryDto)
+        public async Task<CategoryDto> CreateAsync(CreateCategoryDto createCategoryDto)
         {
-            throw new NotImplementedException();
+            var category = _mapper.Map<Category>(createCategoryDto);
+            var createEntity = await _categoryRepository.CreateAsync(category);
+            var entity = _mapper.Map<CategoryDto>(createEntity);
+
+            return entity;
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var category = await _categoryRepository.GetByIdAsync(x => x.Id == id);
+            await _categoryRepository.DeleteAsync(category);
         }
 
-        public Task<IEnumerable<CategoryDto>> GetAllAsync()
+        public async Task<IEnumerable<CategoryDto>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var categories = await _categoryRepository.GetAllAsync();
+
+            return  _mapper.Map<List<CategoryDto>>(categories);
         }
 
-        public Task<CategoryDto> GetByIdAsync(int id)
+        public async Task<CategoryDto> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var category = await _categoryRepository.GetByIdAsync(x => x.Id == id);
+
+            return _mapper.Map<CategoryDto>(category);
         }
 
-        public Task UpdateAsync(UpdateCategoryDto updateCategoryDto)
+        public async Task UpdateAsync(UpdateCategoryDto updateCategoryDto)
         {
-            throw new NotImplementedException();
+            var category = _mapper.Map<Category>(updateCategoryDto);
+
+            await _categoryRepository.UpdateAsync(category);
         }
     }
 }

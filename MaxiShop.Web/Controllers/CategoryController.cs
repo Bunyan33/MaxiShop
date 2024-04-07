@@ -41,7 +41,7 @@ namespace MaxiShop.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> Read(int id)
         {
-            var category = await _categoryRepository.GetById(x => x.Id == id);
+            var category = await _categoryRepository.GetByIdAsync(x => x.Id == id);
 
             if (category == null)
             {
@@ -72,7 +72,7 @@ namespace MaxiShop.Web.Controllers
                 return BadRequest();
             }
 
-            var result = await _categoryRepository.GetById(x => x.Id == id);
+            var result = await _categoryRepository.GetByIdAsync(x => x.Id == id);
             if(result == null)
             {
                 return NotFound();
