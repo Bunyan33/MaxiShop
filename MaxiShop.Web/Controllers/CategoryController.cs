@@ -57,7 +57,7 @@ namespace MaxiShop.Web.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateAsync([FromBody] Category category)
         {
-            await _categoryRepository.Update(category);
+            await _categoryRepository.UpdateAsync(category);
             return NoContent();
         }
 

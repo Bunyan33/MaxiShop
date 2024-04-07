@@ -9,6 +9,6 @@ namespace MaxiShop.Domine.Contracts
 {
     public interface ICategoryRepository : IGenericRepository<Category>
     {
-        Task Update(Category category);
+        Task UpdateAsync(Category category);
     }
 }
