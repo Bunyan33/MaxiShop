@@ -1,4 +1,6 @@
-﻿using MaxiShop.Domine.Contracts;
+﻿using MaxiShop.Application.DTO.Category;
+using MaxiShop.Application.Services.Interface;
+using MaxiShop.Domine.Contracts;
 using MaxiShop.Domine.Models;
 using MaxiShop.Infrastructure.DbContexts;
 using Microsoft.AspNetCore.Http;
@@ -10,19 +12,19 @@ namespace MaxiShop.Web.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly ICategoryService _categoryService;
 
-        public CategoryController(ICategoryRepository categoryRepository)
+        public CategoryController(ICategoryService categoryService)
         {
-            _categoryRepository = categoryRepository;
+            _categoryService = categoryService;
         }
 
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody]Category category)
+        public async Task<ActionResult> Create([FromBody]CreateCategoryDto category)
         {
-            await _categoryRepository.CreateAsync(category);
+            await _categoryService.CreateAsync(category);
             return Ok();
         }
 
@@ -31,7 +33,7 @@ namespace MaxiShop.Web.Controllers
         [Route("Details")]
         public async Task<ActionResult> ReadAll()
         {
-            var categories = await _categoryRepository.GetAllAsync();
+            var categories = await _categoryService.GetAllAsync();
             
             return Ok(categories);
         }
@@ -41,7 +43,7 @@ namespace MaxiShop.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> Read(int id)
         {
-            var category = await _categoryRepository.GetByIdAsync(x => x.Id == id);
+            var category = await _categoryService.GetByIdAsync(id);
 
             if (category == null)
             {
@@ -55,9 +57,9 @@ namespace MaxiShop.Web.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpPut]
-        public async Task<ActionResult> UpdateAsync([FromBody] Category category)
+        public async Task<ActionResult> UpdateAsync([FromBody]UpdateCategoryDto category)
         {
-            await _categoryRepository.UpdateAsync(category);
+            await _categoryService.UpdateAsync(category);
             return NoContent();
         }
 
@@ -72,12 +74,12 @@ namespace MaxiShop.Web.Controllers
                 return BadRequest();
             }
 
-            var result = await _categoryRepository.GetByIdAsync(x => x.Id == id);
+            var result = await _categoryService.GetByIdAsync(id);
             if(result == null)
             {
                 return NotFound();
             }
-            await _categoryRepository.DeleteAsync(result);
+            await _categoryService.DeleteAsync(id);
             return NoContent();
         }
     }
