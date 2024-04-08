@@ -36,6 +36,8 @@ namespace MaxiShop.Web.Controllers
                     _response.statusCode = HttpStatusCode.BadRequest;
                     _response.DisplayMessage = CommonMessage.CreateOperationFailed;
                     _response.AddError(ModelState.ToString());
+
+                    return Ok(_response);
                 }
                 var entity = await _categoryService.CreateAsync(category);
                 _response.statusCode = HttpStatusCode.Created;
@@ -85,8 +87,9 @@ namespace MaxiShop.Web.Controllers
                 {
                     _response.statusCode = HttpStatusCode.NotFound;
                     _response.AddError(CommonMessage.RecordNotFound);
-                }
 
+                    return Ok(_response);
+                }
                 _response.statusCode = HttpStatusCode.OK;
                 _response.IsSuccess = true;
                 _response.Result = category;
@@ -114,7 +117,19 @@ namespace MaxiShop.Web.Controllers
                     _response.statusCode = HttpStatusCode.BadRequest;
                     _response.DisplayMessage = CommonMessage.UpdateOperationFailed;
                     _response.AddError(ModelState.ToString());
+
+                    return Ok(_response);
                 }
+                var result = await _categoryService.GetByIdAsync(category.Id);
+
+                if (result == null)
+                {
+                    _response.statusCode = HttpStatusCode.NotFound;
+                    _response.DisplayMessage = CommonMessage.UpdateOperationFailed;
+
+                    return Ok(_response);
+                }
+
                 await _categoryService.UpdateAsync(category);
                 _response.statusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;
@@ -141,15 +156,15 @@ namespace MaxiShop.Web.Controllers
                 {
                     _response.statusCode = HttpStatusCode.BadRequest;
                     _response.DisplayMessage = CommonMessage.DeleteOperationFailed;
-                    _response.AddError(ModelState.ToString());
+                    return Ok(_response);
                 }
 
                 var result = await _categoryService.GetByIdAsync(id);
-                if (result == null)
+                if (result == null && id!=0)
                 {
                     _response.statusCode = HttpStatusCode.NotFound;
                     _response.DisplayMessage = CommonMessage.DeleteOperationFailed;
-                    _response.AddError(CommonMessage.RecordNotFound);
+                    return Ok(_response);
                 }
                 await _categoryService.DeleteAsync(id);
                 _response.statusCode = HttpStatusCode.NoContent;
