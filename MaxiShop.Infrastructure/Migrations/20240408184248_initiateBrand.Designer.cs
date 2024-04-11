@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MaxiShop.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240408184248_initiateBrand")]
-    partial class initiateBrand
+    [Migration("20240408184248_initiateProduct")]
+    partial class initiateProduct
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace MaxiShop.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("MaxiShop.Domine.Models.Brand", b =>
+            modelBuilder.Entity("MaxiShop.Domine.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -44,7 +44,7 @@ namespace MaxiShop.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("MaxiShop.Domine.Models.Category", b =>

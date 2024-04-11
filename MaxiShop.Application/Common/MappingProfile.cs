@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
-using MaxiShop.Application.DTO.Brand;
+using MaxiShop.Application.DTO.Product;
 using MaxiShop.Application.DTO.Category;
+using MaxiShop.Application.DTO.Product;
 using MaxiShop.Domine.Models;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,10 @@ namespace MaxiShop.Application.Common
             CreateMap<Category,CreateCategoryDto>().ReverseMap();
             CreateMap<Category,UpdateCategoryDto>().ReverseMap();
             CreateMap<Category,CategoryDto>().ReverseMap();
+
+            CreateMap<Product, CreateProductDto>().ReverseMap();
+            CreateMap<Product, UpdateProductDto>().ReverseMap();
+            CreateMap<Product, ProductDto>().ReverseMap();
 
             CreateMap<Brand, CreateBrandDto>().ReverseMap();
             CreateMap<Brand, UpdateBrandDto>().ReverseMap();
