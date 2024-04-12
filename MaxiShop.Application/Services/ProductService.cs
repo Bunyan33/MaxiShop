@@ -56,6 +56,10 @@ namespace MaxiShop.Application.Services
             {
                 query = query.Where(x => x.BrandId == brandId);
             }
+
+            var result = _mapper.Map<List<ProductDto>>(query);
+
+            return result;
         }
 
         public async Task<ProductDto> GetByIdAsync(int id)
