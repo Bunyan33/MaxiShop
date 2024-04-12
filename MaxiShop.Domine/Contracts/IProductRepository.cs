@@ -11,7 +11,7 @@ namespace MaxiShop.Domine.Contracts
     {
         Task UpdateAsync(Product product);
 
-        Task<IEnumerable<Product>> GetAllProductAsync();
+        Task<List<Product>> GetAllProductAsync();
 
         Task<Product> GetProductByIdAsync(int id);
 
