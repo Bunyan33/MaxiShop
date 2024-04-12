@@ -38,14 +38,29 @@ namespace MaxiShop.Application.Services
 
         public async Task<IEnumerable<ProductDto>> GetAllAsync()
         {
-            var products = await _productRepository.GetAllAsync();
+            var products = await _productRepository.GetAllProductAsync();
 
             return _mapper.Map<List<ProductDto>>(products);
         }
 
+        public async Task<IEnumerable<ProductDto>> GetAllByFilterAsync(int? categoryId, int? brandId)
+        {
+            var query = await _productRepository.GetAllProductAsync();
+
+            if (categoryId > 0)
+            {
+                query = query.Where(x => x.CategoryId == categoryId);
+            }
+
+            if (brandId > 0)
+            {
+                query = query.Where(x => x.BrandId == brandId);
+            }
+        }
+
         public async Task<ProductDto> GetByIdAsync(int id)
         {
-            var product = await _productRepository.GetByIdAsync(x => x.Id == id);
+            var product = await _productRepository.GetProductByIdAsync(id);
 
             return _mapper.Map<ProductDto>(product);
         }

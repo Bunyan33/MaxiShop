@@ -1,5 +1,6 @@
 ﻿using MaxiShop.Application.DTO.Category;
 using MaxiShop.Application.DTO.Product;
+using MaxiShop.Domine.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace MaxiShop.Application.Services.Interface
         Task<ProductDto> GetByIdAsync(int id);
 
         Task<IEnumerable<ProductDto>> GetAllAsync();
+
+        Task<IEnumerable<ProductDto>> GetAllByFilterAsync(int? categoryId, int? brandId);
 
         Task<ProductDto> CreateAsync(CreateProductDto createProductDto);
 

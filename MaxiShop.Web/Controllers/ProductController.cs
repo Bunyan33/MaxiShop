@@ -1,7 +1,8 @@
 ﻿using MaxiShop.Application.ApplicationConstants;
 using MaxiShop.Application.Common;
-using MaxiShop.Application.DTO.Brand;
+using MaxiShop.Application.DTO.Product;
 using MaxiShop.Application.Services.Interface;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -9,21 +10,21 @@ namespace MaxiShop.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BrandController : ControllerBase
+    public class ProductController : ControllerBase
     {
-        private readonly IBrandService _brandService;
+        private readonly IProductService _productService;
         protected APIResponse _response;
 
-        public BrandController(IBrandService brandService)
+        public ProductController(IProductService productService)
         {
-            _brandService = brandService;
+            _productService = productService;
             _response = new();
         }
 
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpPost]
-        public async Task<ActionResult<APIResponse>> Create([FromBody] CreateBrandDto createBrandDto)
+        public async Task<ActionResult<APIResponse>> Create([FromBody] CreateProductDto createProductDto)
         {
             try
             {
@@ -35,7 +36,7 @@ namespace MaxiShop.Web.Controllers
 
                     return Ok(_response);
                 }
-                var entity = await _brandService.CreateAsync(createBrandDto);
+                var entity = await _productService.CreateAsync(createProductDto);
                 _response.statusCode = HttpStatusCode.Created;
                 _response.IsSuccess = true;
                 _response.DisplayMessage = CommonMessage.CreateOperationSuccess;
@@ -57,11 +58,11 @@ namespace MaxiShop.Web.Controllers
         {
             try
             {
-                var brands = await _brandService.GetAllAsync();
+                var products = await _productService.GetAllAsync();
 
                 _response.statusCode = HttpStatusCode.OK;
                 _response.IsSuccess = true;
-                _response.Result = brands;
+                _response.Result = products;
             }
             catch (Exception)
             {
@@ -77,9 +78,9 @@ namespace MaxiShop.Web.Controllers
         {
             try
             {
-                var brand = await _brandService.GetByIdAsync(id);
+                var product = await _productService.GetByIdAsync(id);
 
-                if (brand == null)
+                if (product == null)
                 {
                     _response.statusCode = HttpStatusCode.NotFound;
                     _response.AddError(CommonMessage.RecordNotFound);
@@ -88,7 +89,7 @@ namespace MaxiShop.Web.Controllers
                 }
                 _response.statusCode = HttpStatusCode.OK;
                 _response.IsSuccess = true;
-                _response.Result = brand;
+                _response.Result = product;
 
             }
             catch (Exception)
@@ -104,7 +105,7 @@ namespace MaxiShop.Web.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpPut]
-        public async Task<ActionResult<APIResponse>> UpdateAsync([FromBody] UpdateBrandDto updateBrandDto)
+        public async Task<ActionResult<APIResponse>> UpdateAsync([FromBody] UpdateProductDto updateProductDto)
         {
             try
             {
@@ -116,7 +117,7 @@ namespace MaxiShop.Web.Controllers
 
                     return Ok(_response);
                 }
-                var result = await _brandService.GetByIdAsync(updateBrandDto.Id);
+                var result = await _productService.GetByIdAsync(updateProductDto.Id);
 
                 if (result == null)
                 {
@@ -126,7 +127,7 @@ namespace MaxiShop.Web.Controllers
                     return Ok(_response);
                 }
 
-                await _brandService.UpdateAsync(updateBrandDto);
+                await _productService.UpdateAsync(updateProductDto);
                 _response.statusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;
                 _response.DisplayMessage = CommonMessage.UpdateOperationSuccess;
@@ -155,14 +156,14 @@ namespace MaxiShop.Web.Controllers
                     return Ok(_response);
                 }
 
-                var result = await _brandService.GetByIdAsync(id);
+                var result = await _productService.GetByIdAsync(id);
                 if (result == null && id != 0)
                 {
                     _response.statusCode = HttpStatusCode.NotFound;
                     _response.DisplayMessage = CommonMessage.DeleteOperationFailed;
                     return Ok(_response);
                 }
-                await _brandService.DeleteAsync(id);
+                await _productService.DeleteAsync(id);
                 _response.statusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;
                 _response.DisplayMessage = CommonMessage.DeleteOperationSuccess;
