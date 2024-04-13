@@ -3,6 +3,7 @@ using MaxiShop.Application;
 using MaxiShop.Infrastructure.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using MaxiShop.Infrastructure.Common;
+using MaxiShop.Web.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -64,6 +65,8 @@ static async void UpdateDataBaseAsync(IHost host)
 #endregion
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 UpdateDataBaseAsync(app);
 
