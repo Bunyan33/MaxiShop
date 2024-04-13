@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MaxiShop.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240411140531_products")]
-    partial class products
+    [Migration("20240413182636_Last")]
+    partial class Last
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace MaxiShop.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("MaxiShop.Domine.Models.Product", b =>
+            modelBuilder.Entity("MaxiShop.Domine.Models.Brand", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -44,7 +44,7 @@ namespace MaxiShop.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Brands");
                 });
 
             modelBuilder.Entity("MaxiShop.Domine.Models.Category", b =>
@@ -75,7 +75,7 @@ namespace MaxiShop.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("BrandId")
                         .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
@@ -95,18 +95,18 @@ namespace MaxiShop.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("BrandId");
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Product");
                 });
 
             modelBuilder.Entity("MaxiShop.Domine.Models.Product", b =>
                 {
-                    b.HasOne("MaxiShop.Domine.Models.Product", "Product")
+                    b.HasOne("MaxiShop.Domine.Models.Brand", "Brand")
                         .WithMany()
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -116,7 +116,7 @@ namespace MaxiShop.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Product");
+                    b.Navigation("Brand");
 
                     b.Navigation("Category");
                 });

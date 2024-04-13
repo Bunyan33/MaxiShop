@@ -33,7 +33,7 @@ namespace MaxiShop.Application.Services
                 throw new BadRequestExeption("InvalidBrandInput", validationResult);
             }
 
-            var brand = _mapper.Map<Brand>(validationResult);
+            var brand = _mapper.Map<Brand>(createBrandDto);
             var createEntity = await _brandRepository.CreateAsync(brand);
             var entity = _mapper.Map<BrandDto>(createEntity);
 
